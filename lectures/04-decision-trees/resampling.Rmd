@@ -8,6 +8,12 @@ output: html_document
 
 ```{r}
 set.seed(314159)
+install.packages('plyr')
+data(baseball, package="plyr")
+install.packages("ggplot2")
+install.packages('AppliedPredictiveModeling')
+library('AppliedPredictiveModeling')
+library(ggplot2)
 ```
 
 
@@ -21,7 +27,22 @@ A very simple model to predict the number of at-bats/game **each** player has pe
 - Show that this is a bad:
 
 ```{r}
+# calculate the RMSE for this model that shows the number of at-bats/game each player has per game 
+install.packages('Metrics')
+library("Metrics")
 
+sqrt(mean((x[wh]-xhat[wh])^2))
+
+attach(basebal)
+library(ggplot2)
+
+q_err <- quote (ab/g-abpg)
+q_abpg <- quote ( sum(ab)/sum(g))
+
+mean( eval(q_err, baseball), na.rm=TRUE)
+hist( eval(q_err,baseball))
+
+# residuals are not mean 0, the errors are not normally distributed 
 ```
 
 
@@ -30,6 +51,11 @@ A very simple model to predict the number of at-bats/game **each** player has pe
 
 ```{r}
 
+# there are a couple of tricks here 
+fit <- lm(ab~g,baseball)
+summary(fit)
+
+lm( ab~ g + 0) #<- Notice the surpression of the intercept 
 
 ```
 
@@ -49,7 +75,8 @@ Using only Recreate the model, providing a new estimate for `ab/g` and the RMSE,
 
 ```{r}
 
-
+#look at the apply function
+#look at the sample funtion (replace=TRUE)
 
 ```
 

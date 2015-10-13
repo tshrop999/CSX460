@@ -124,6 +124,7 @@ Write functions that take a vector of observed outcomes(x) and vector of predict
 
 ```{r}
 
+
 tpr <- function(x,y) sum(x==y & x ) /sum(x) 
 fpr <- function(x,y) sum(x!=y & !x) /sum(!x)  
 tnr <- function(x,y) sum(y==x & !x) /sum(!x)
